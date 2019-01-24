@@ -105,7 +105,7 @@ cost.p = 0;                               % length of pendulum
 cost.width = 0.4;                          % cost function width
 cost.expl =  -0.3;                          % exploration parameter (UCB)
 cost.angle = plant.angi;                   % index of angle (for cost function)
-cost.target = [5 0]';                 % target state
+cost.target = [2 0]';                 % target state
 
 % 6. Dynamics model structure
 dynmodel.fcn = @gp1d;                % function for GP predictions

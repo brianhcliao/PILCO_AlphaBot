@@ -20,9 +20,20 @@ close all;
 settings_ab;                      % load scenario-specific settings
 basename = 'alphaBot';           % filename used for saving data
 
+% Connect to RPi board
+flag = exist('mypi', 'var');
+if flag == 0
+    try 
+        disp('Connecting to RPi...');
+        mypi = raspi('192.168.10.108','pi','arthur');
+    catch ME
+        rethrow(ME);
+    end
+end
+
 % 2. Initial J random rollouts
 for jj = 1:J
-  [xx, yy, realCost{jj}, latent{jj}] = rollout(gaussian(mu0, S0), struct('maxU',policy.maxU), H, plant, cost);
+  [xx, yy, realCost{jj}, latent{jj}] = rollout_ab(gaussian(mu0, S0), struct('maxU',policy.maxU), H, plant, cost, mypi);
 
   x = [x; xx];         % augment training sets for dynamics model
   y = [y; yy];       

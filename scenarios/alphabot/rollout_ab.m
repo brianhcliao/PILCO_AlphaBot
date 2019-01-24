@@ -46,7 +46,7 @@
 
 
 
-function [x y L latent] = rollout_ab(start, policy, H, plant, cost)
+function [x y L latent] = rollout_ab(start, policy, H, plant, cost, mypi)
 %% Code
 
 if isfield(plant,'augment')
@@ -104,7 +104,7 @@ for i = 1:H % --------------------------------------------- generate trajectory
   
   
   % 2. Apply to AlphaBot -------------------------------------------------------
-  next(odei) = alphabotControl(state(odei), u(i,:));
+  next(odei) = alphabotControl(state(odei), u(i,:), plant, mypi);
   
   % 3. Stop rollout if constraints violated ------------------------------------
   if isfield(plant,'constraint') && plant.constraint(next(odei))

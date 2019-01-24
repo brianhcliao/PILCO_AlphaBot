@@ -1,8 +1,10 @@
 % Initialization
-duty_cycle = 1;
+duty_cycle = 0.5;
 ready_time = 200;
-duration = 500; % unit : ms
+duration = 1500; % unit : ms
 run stop.m;
+
+% temp = system(mypi, 'python photo_interrupter.py');
 
 % Running forward
 start_distance = get_distance(mypi);

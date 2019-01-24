@@ -16,8 +16,8 @@
 disp("Press a button to continue");
 pause;
 
-
-    
+flag = exist mypi;
+if !flag
     
 
 % 1. Generate trajectory rollout given the current policy
@@ -27,7 +27,7 @@ else
     HH = H; 
 end
 
-[xx, yy, realCost{j+J}, latent{j}] = rollout_ab(gaussian(mu0, S0), policy, HH, plant, cost, mypi);
+[xx, yy, realCost{j+J}, latent{j}] = rollout_ab(gaussian(mu0, S0), policy, HH, plant, cost);
 
 disp(xx);                           % display states of observed trajectory
 
