@@ -59,7 +59,7 @@ dt = 0.10;                         % [s] sampling time
 T = 4.0;                          % [s] initial prediction horizon time
 H = ceil(T/dt);                    % prediction steps (optimization horizon)
 maxH = H;
-mu0 = [0 0]';                    % initial state mean
+mu0 = [180 0]';                    % initial state mean
 S0 = diag([0.1 0.1].^2);       % initial state covariance
 N = 15;                            % number controller optimizations
 J = 1;                             % initial J trajectories of length H
@@ -83,7 +83,7 @@ plant.prop = @propagated;
 
 % 4. Policy structure
 policy.fcn = @(policy,m,s)conCat(@congp,@gSat,policy,m,s);     % controller representation
-policy.maxU = 4;                                           % max. amplitude of control
+policy.maxU = 2;                                           % max. amplitude of control
 
 % required by linear control
 % policy.p.w = 1e-2*randn(length(policy.maxU),length(poli));  % weight matrix  
@@ -105,7 +105,7 @@ cost.p = 0;                               % length of pendulum
 cost.width = 0.4;                          % cost function width
 cost.expl =  -0.3;                          % exploration parameter (UCB)
 cost.angle = plant.angi;                   % index of angle (for cost function)
-cost.target = [2 0]';                 % target state
+cost.target = [50 0]';                 % target state
 
 % 6. Dynamics model structure
 dynmodel.fcn = @gp1d;                % function for GP predictions

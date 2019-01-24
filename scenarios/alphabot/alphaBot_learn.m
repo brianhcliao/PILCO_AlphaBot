@@ -33,7 +33,7 @@ end
 
 % 2. Initial J random rollouts
 for jj = 1:J
-  [xx, yy, realCost{jj}, latent{jj}] = rollout_ab(gaussian(mu0, S0), struct('maxU',policy.maxU), H, plant, cost, mypi);
+  [xx, yy, realCost{jj} latent{jj}] = rollout_ab(gaussian(mu0, S0), struct('maxU',policy.maxU), H, plant, cost, mypi);
 
   x = [x; xx];         % augment training sets for dynamics model
   y = [y; yy];       

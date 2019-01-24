@@ -33,7 +33,7 @@ addpath('./utility/');
 % Save controls to file
 wfile = fopen('controls.txt', 'w');
 for i = 1:length(u) 
-    u(i,:) = u(i,:) .* 0.5;
+    u(i,:) = u(i,:) .* 0.25;
     fprintf( wfile, '%f\n', u(i,:));
 end
 fclose(wfile);
@@ -42,7 +42,7 @@ fclose(wfile);
 putFile(mypi,'./controls.txt')
 
 % Call RPi Python funciton
-system(mypi, 'python run_trial.py');
+syste
 
 % Wait for user trigger
 disp('Press a button to continue');
@@ -55,9 +55,26 @@ getFile(mypi,'states.txt');
 rfile = fopen('states.txt', 'r');
 formatSpec = '%f %f';
 sizeOfStates = [2 Inf];
-states = fscanf(rfile, formatSpec, sizeOfStates);
-states = states';
+states = fscanf(rfile, formatSpec, sizeOfStates)
 fclose(rfile);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -85,3 +102,9 @@ fclose(rfile);
 % % Feedback next state
 % nextState(1) = dist_mapped;
 % nextState(2) = dutyCycle;
+
+
+
+
+
+

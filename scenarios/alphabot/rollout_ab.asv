@@ -27,7 +27,6 @@
 %   x          matrix of observed states                           [H   x nX+nU]
 %   y          matrix of corresponding observed successor states   [H   x   nX ]
 %   L          cost incurred at each time step                     [ 1  x    H ]
-%   latent     matrix of latent states                             [H+1 x nX+nU]
 %
 % Copyright (C) 2018-2019 by 
 % Brian Liao
@@ -46,7 +45,7 @@
 
 
 
-function [x y L latent] = rollout_ab(start, policy, H, plant, cost, mypi)
+function [x y L ] = rollout_ab(start, policy, H, plant, cost, mypi)
 %% Code
 
 if isfield(plant,'augment')
@@ -74,7 +73,7 @@ nA = length(angi);
 
 state(simi) = start; 
 state(augi) = plant.augment(state);      % initializations
-x = zeros(H, nX+nU);
+x = zeros(H+1, nX+2*nA);
 x(1,simi) = start' + randn(size(simi))*chol(plant.noise);
 x(1,augi) = plant.augment(x(1,:));
 u = zeros(H, nU); 
@@ -104,7 +103,7 @@ end
 %   next(subi) = plant.subplant(state, u(i,:));
   
   % 2. Apply to AlphaBot -------------------------------------------------------
-  states = alphabotControl(u, mypi);
+  states = alphabotControl(u(i,:), mypi);
 
 
 for i = 1:H % --------------------------------------------- generate trajectory
@@ -129,9 +128,7 @@ for i = 1:H % --------------------------------------------- generate trajectory
   end
 end
 
-y = states; 
-x(1,:) = [start' u(1,:)];
-x(2:H,:) = [states(1:H-1,:) u(2:H,:)]; 
-latent = x;
-latent(H+1,:) = [states(H,:) u(H,:)];
+x
+y = x(2:H+1,1:nX); 
+x = [x(1:H,:) u(1:H,:)]; 
 L = L(1,1:H);

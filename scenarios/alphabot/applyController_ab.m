@@ -13,12 +13,7 @@
 
 %% Code
 
-disp("Press a button to continue");
-pause;
 
-
-    
-    
 
 % 1. Generate trajectory rollout given the current policy
 if isfield(plant,'constraint')
@@ -27,7 +22,7 @@ else
     HH = H; 
 end
 
-[xx, yy, realCost{j+J}, latent{j}] = rollout_ab(gaussian(mu0, S0), policy, HH, plant, cost, mypi);
+[xx, yy, realCost{j+J} latent{j+J}] = rollout_ab(gaussian(mu0, S0), policy, HH, plant, cost, mypi);
 
 disp(xx);                           % display states of observed trajectory
 
